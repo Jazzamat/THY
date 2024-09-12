@@ -1,0 +1,75 @@
+.App {
+	text-align: center;
+}
+
+.App-logo {
+	height: 40vmin;
+	pointer-events: none;
+}
+
+.thytodo {
+	color: black;
+}
+
+.TodoList {
+	display: grid;
+	border: solid black 2px;
+	border-radius: 7px;
+	border-color: #c70a0c;
+	grid-template-columns: 100%;
+	align-items: center;
+	justify-content:center;
+}
+
+.Todo {
+	color:white;
+	align-items: right;
+	background-color:#c70a0c;
+	padding: 1px 50px;
+	margin: 10px;
+	border-radius:7px;
+	font-size: calc(3px + 2vmin);
+}
+
+.TodoText {
+
+}
+
+
+.SearchBar {
+	color:black;
+	margin: 20px 10px;
+	border-color: #c70a0c;
+	background-color: #fffff2;
+	height: 50px;
+	font-size:calc(7px + 2vmin);
+	border-radius:7px;
+	border-width: 3px;
+	align-items: center;
+	justify-content:center;
+}
+
+
+.App-header {
+	background-color: #fffff2;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: calc(10px + 2vmin);
+	color: white;
+}
+
+.App-link {
+	color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+from {
+	transform: rotate(0deg);
+}
+to {
+	transform: rotate(360deg);
+}
+}
