@@ -2,6 +2,12 @@
 	text-align: center;
 }
 
+.UpperBar {
+	display:flex;
+	flex-direction:row;
+	justify-content: space-between;
+}
+
 .App-logo {
 	height: 40vmin;
 	pointer-events: none;
@@ -21,32 +27,97 @@
 	justify-content:center;
 }
 
+
+.PageSelect {
+	display:flex;
+	justify-content:right;
+	padding: 10px 0px;
+}
+
+
+.PageButton {
+
+	padding: 0px 5px;
+
+	background-color:transparent;
+	color: #c70a0c;
+	font-size: 16;
+	border:none;
+	margin: 0px 5px;
+	font-weight: bold;
+	font-size: calc(5px + 2vmin);
+}
+
 .Todo {
+	display: flex;
+	flex-direction:row;
+	justify-content:space-between;
+	text-align:left;
 	color:white;
-	align-items: right;
 	background-color:#c70a0c;
-	padding: 1px 50px;
+	padding: 1px 25px;
 	margin: 10px;
 	border-radius:7px;
 	font-size: calc(3px + 2vmin);
 }
 
 .TodoText {
+	padding: 0px 10px 0px 0px;
+}
+
+.TodoButtons {
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
+}
+
+
+.Button {
+	height: 25px;
+	justify-content: center;
+	padding: 5px;
+	margin: 5px;
+}
+
+
+
+.TodoText {
 
 }
 
 
-.SearchBar {
-	color:black;
-	margin: 20px 10px;
+.UpperBar {
+	padding: 0px 0px 0px 0px;
+	margin: 0px 0px 12px 0px;
+}
+
+
+
+.Hero {
+	height: 500px;
+	width: 500px;
+}
+
+
+.SearchBarDiv {
+	display:flex;
+	padding:5px;
+	border: solid 1px;
 	border-color: #c70a0c;
 	background-color: #fffff2;
-	height: 50px;
-	font-size:calc(7px + 2vmin);
 	border-radius:7px;
 	border-width: 3px;
-	align-items: center;
-	justify-content:center;
+}
+
+.SearchBar {
+	height: 50px;
+	width: 350px;
+	padding: 0px 0px 0px 10px;
+	outline:none;
+	border:none;
+	color:black;
+	background-color: #fffff2;
+	font-size:calc(7px + 2vmin);
 }
 
 
