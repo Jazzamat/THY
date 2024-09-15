@@ -23,6 +23,13 @@ public class ThyController {
 		this.service = service;
 	}
 
+
+	@CrossOrigin(origins = "*")
+	@GetMapping("/")
+	public String landingPage(){
+		return new String("Welcome to the THY TODO API");
+	}
+
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Iterable<Todo>> findAll() {
 		return ResponseEntity.ok(service.findAll());
@@ -53,11 +60,6 @@ public class ThyController {
 		return ResponseEntity.created(URI.create("/" + todo.getId())).body(savedTodo);
 	}
 
-
-	@GetMapping("/")
-	public String landingPage(){
-		return new String("Welcome to the THY TODO API");
-	}
 
 	@GetMapping("/new")
 	public Todo newTodo(@RequestParam(value = "content") String content) {

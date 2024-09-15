@@ -1,18 +1,15 @@
+import {Button} from "@mui/material";
 
-import {Button, IconButton} from "@mui/material";
-import SearchIcon from '@mui/icons-material/Search';
-
-function CreateForm() {
+function CreateForm({toggleCreate, handleCreate}) {
 	return (
 		<div className="CreateForm">
-				
 				New Todo
 			<input className="newTodoInput" placeholder="Todo..."></input>
 			<div>
-				<Button style={{backgroundColor: "#c70a0c", color: "white"}}>
+				<Button style={{backgroundColor: "#c70a0c", color: "white"}} onClick={handleCreate}>
 					Create
 				</Button> 
-				<Button style={{color:"grey"}}>
+				<Button style={{color:"grey"}} onClick={toggleCreate}>
 					Cancel
 				</Button>
 			</div>

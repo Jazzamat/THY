@@ -143,6 +143,7 @@
 .CreateForm {
 		borderRadius: 10px;
 		background-color: #fffff2;
+		position:absolute;
 		color:black;
 		padding: 20px;
 		display: flex;
@@ -167,7 +168,6 @@
 }
 
 .plus {
-	background-color: #fffff2;
 	color: #c70a0c;
 }
 
