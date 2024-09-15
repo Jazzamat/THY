@@ -1,14 +1,17 @@
 
+import {useEffect, useState} from 'react';
 import Todo from './Todo.js'
 
-function TodoList() {
+function TodoList({todos}) {
+
+	const listedItems = todos.map(content =>
+		<Todo content={content}></Todo>
+	);
+
 	return (
-			<div className="TodoList">
-				<Todo content="Make a reservations for dinner at 6"></Todo>
-				<Todo content="Feed the cats!!!"></Todo>
-				<Todo content="File for a divorce"></Todo>
-				<Todo content="I forgot to remind myself that I need to make a reminder"></Todo>
-			</div>
+		<div className="TodoList">
+			{listedItems}
+		</div>
 	);
 }
 
