@@ -31,6 +31,7 @@
 
 .PageSelect {
 	display:flex;
+	flex-direction:row;
 	justify-content:right;
 	padding: 10px 0px;
 }
@@ -39,12 +40,16 @@
 .PageButton {
 	padding: 0px 5px;
 	background-color:transparent;
-	color: #c70a0c;
+	color: grey;
 	font-size: 16;
 	border:none;
 	margin: 0px 5px;
 	font-weight: bold;
 	font-size: calc(5px + 2vmin);
+}
+
+.PageButton:current{
+	color: #c70a0c;
 }
 
 .Todo {

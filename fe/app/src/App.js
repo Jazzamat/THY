@@ -1,6 +1,5 @@
 import {IconButton} from '@mui/material';
 import './App.css';
-import PageSelect from './PageSelect';
 import SearchBar from './SearchBar';
 import TodoList from './TodoList';
 import AddIcon from '@mui/icons-material/Add';
@@ -17,7 +16,23 @@ function App() {
 		'File for a divorce',
 		'I forgot to remind myself that I need to make a reminder',
 		'Subrahmanyan Chandrasekhar: astrophysicist',
+		'Water the plants',
+		'Reply to emails from last week',
+		'Plan the vacation itinerary',
+		'Pick up dry cleaning',
+		'Order groceries online',
+		'Schedule a meeting with the accountant',
+		'Meditate for 10 minutes',
+		'Call mom and check in',
+		'Look into investing in that new startup',
+		'Cancel gym membership (never went anyway)',
+		'Fix the leaky faucet',
+		'Watch that new documentary everyone is talking about',
+		'Buy a birthday gift for Sarah',
+		'Check the weather for the weekend hike',
+		'Start learning Spanish (again)',
 	];
+
 
 	const [creating, setCreating] = useState(false);
 	const [search, setSearch] = useState("");
@@ -53,7 +68,6 @@ function App() {
 
 	return (
 		<div className="App">
-
 			<header className="App-header">
 				<img src={"t.png"} className="App-logo" alt="logo" />
 				{creating && (
@@ -67,9 +81,6 @@ function App() {
 						</IconButton>
 					</div>
 					<TodoList todos={searchResults}/>
-					<div className="LowerBar">
-						<PageSelect/>
-					</div>
 				</div>
 			</header>
 		</div>
