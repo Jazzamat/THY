@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,7 +38,6 @@ public class ThyController {
 	@DeleteMapping(value = "/{product_id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> delete(@PathVariable("todo_id") String todo_id) {
 		try {
-
 			service.delete(Long.valueOf(todo_id));
 		} catch (Exception e){
 			System.out.println("What you are trying to delte doesn't exist");
@@ -46,6 +46,7 @@ public class ThyController {
 		return ResponseEntity.ok(todo_id);
 	}
 
+	@CrossOrigin(origins = "http://127.0.0.1:3000")
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Todo> create(@RequestBody Todo todo) {
 		Todo savedTodo = service.save(todo);

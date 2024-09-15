@@ -1,5 +1,6 @@
 .App {
 	text-align: center;
+	z-index: 1;
 }
 
 .UpperBar {
@@ -36,9 +37,7 @@
 
 
 .PageButton {
-
 	padding: 0px 5px;
-
 	background-color:transparent;
 	color: #c70a0c;
 	font-size: 16;
@@ -91,13 +90,10 @@
 	margin: 0px 0px 12px 0px;
 }
 
-
-
 .Hero {
 	height: 500px;
 	width: 500px;
 }
-
 
 .SearchBarDiv {
 	display:flex;
@@ -135,6 +131,46 @@
 .App-link {
 	color: #61dafb;
 }
+
+.addButton {
+	border: none;
+	outline: none;
+	background-color:transparent;
+
+}
+
+
+.CreateForm {
+		borderRadius: 10px;
+		background-color: #fffff2;
+		color:black;
+		padding: 20px;
+		display: flex;
+		flex-direction: column;
+		justify-content: left;
+		border-radius:7px;
+		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+		gap: 20px;
+		z-index:5;
+}
+
+.newTodoInput {
+	height: 50px;
+	width: 350px;
+	padding: 0px 0px 0px 10px;
+	outline:none;
+	border-color:#c70a0c;
+	border-radius: 7px;
+	color:black;
+	background-color: #fffff2;
+	font-size:calc(7px + 2vmin);
+}
+
+.plus {
+	background-color: #fffff2;
+	color: #c70a0c;
+}
+
 
 @keyframes App-logo-spin {
 from {

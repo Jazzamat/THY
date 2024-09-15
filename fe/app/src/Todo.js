@@ -1,4 +1,7 @@
-
+import {Button, Icon, IconButton} from "@mui/material";
+import DeleteIcon from '@mui/icons-material/Delete';
+import {EditIcon} from "@mui/icons-material/Edit";
+import {Edit} from "@mui/icons-material";
 function Todo({content}) {
 
 
@@ -8,8 +11,12 @@ function Todo({content}) {
 				<h2 className="TodoText">{content}</h2>
 			</div>
 			<div className="TodoButtons">
-				<button className="Button">edit</button>
-				<button className="Button">delete</button>
+				<IconButton aria-label="edit" style={{color:"white"}}>
+					<Edit/>
+				</IconButton>
+				<IconButton aria-label="delete" style={{color:"black"}}>
+					<DeleteIcon/>
+				</IconButton>
 			</div>
 		</div>
 	);

@@ -1,6 +1,5 @@
-
-
-
+import {Button, IconButton} from "@mui/material";
+import SearchIcon from '@mui/icons-material/Search';
 
 function SearchBar() {
 	return (
@@ -8,7 +7,9 @@ function SearchBar() {
 			<input className="SearchBar" placeholder={"Search"} >
 				
 			</input>
-			<button>Search</button>
+			<IconButton>
+				<SearchIcon/>
+			</IconButton> 
 		</div>
 	);
 }
