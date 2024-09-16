@@ -1,14 +1,14 @@
 
 import Todo from './Todo.js'
 
-function TodoList({todos, currentPage, setCurrentPage, handleDelete}) {
+function TodoList({todos, currentPage, setCurrentPage, handleDelete, primeUpdating}) {
 	const todosPerPage = 5;
 	const lastIndexOfPage = currentPage * todosPerPage;
 	const firstIndexOfPage = lastIndexOfPage - todosPerPage;
 
 
 	const listedItems = todos.map(todo =>
-		<Todo content={todo.content} id={todo.id} handleDelete={handleDelete}></Todo>
+		<Todo content={todo.content} id={todo.id} handleDelete={handleDelete}  primeUpdating={primeUpdating}></Todo>
 	);
 
 	const paginatedlistedItems = listedItems.slice(firstIndexOfPage, lastIndexOfPage)

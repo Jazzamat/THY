@@ -5,6 +5,7 @@ import TodoList from './TodoList';
 import AddIcon from '@mui/icons-material/Add';
 import {useEffect, useState} from 'react';
 import CreateForm from './CreateForm';
+import UpdateForm from './UpdateForm';
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
 	const [init, setInit] = useState(true);
 	const [creating, setCreating] = useState(false);
 	const [updating, setUpdating] = useState(false);
+	const [todoBeingUpdated, setTodoBeingUpdated] = useState(null);
 	const [search, setSearch] = useState("");
 	const [currentPage, setCurrentPage] = useState(1);
 	const [newTodo, setNewTodo] = useState(null);
@@ -30,6 +32,14 @@ function App() {
 	function toggleUpdating() {
 		setUpdating(!updating)
 	}
+
+	function primeUpdating(id) {
+		console.log("The todo primedFor updating: " + id)
+		setCreating(false);
+		toggleUpdating();
+		setTodoBeingUpdated(id);
+	}
+
 
 	function handleSearch(e) {
 		setCurrentPage(1)
@@ -54,9 +64,9 @@ function App() {
 			headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'},
 		};
 		fetch('http://127.0.0.1:8080', requestOptions)
-		.then(response => response.json())
+			.then(response => response.json())
 			.then(data => {
-				console.log(data);
+			console.log(data);
 				var todosRaw = extractRawTodos(data);
 				setTodos(data);
 				console.log(fethcedResponse)
@@ -77,7 +87,7 @@ function App() {
 		fetch('http://127.0.0.1:8080', requestOptions)
 			.then(response => response.json())
 			.then(data => {
-				console.log(data);
+			console.log(data);
 				var todosRaw = extractRawTodos(data);
 				setTodos(data);
 			})
@@ -95,34 +105,34 @@ function App() {
 		fetch(`http://127.0.0.1:8080/${id}`, requestOptions)
 			.then(response => response.json())
 			.then(data => {
-				console.log(data);
+			console.log(data);
 				var todosRaw = extractRawTodos(data);
 				setTodos(data);
 			})
 			.catch(error => console.error(error));
 	}
 
-	function handleUpdate(id) {
-		console.log("Editing id: " + id);
+	function handleUpdate() {
+		console.log("Editing id: " + todoBeingUpdated);
+		console.log("this is the new content:");
+		console.log(newTodo)
+
 		// Simple POST request with a JSON body using fetch
 		const requestOptions = {
 			method: 'PUT',
 			headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'},
 			body: JSON.stringify({ content:  newTodo})
 		};
-		fetch(`http://127.0.0.1:8080/${id}`, requestOptions)
+		fetch(`http://127.0.0.1:8080/${todoBeingUpdated}`, requestOptions)
 			.then(response => response.json())
 			.then(data => {
-				console.log(data);
+			console.log(data);
 				var todosRaw = extractRawTodos(data);
 				setTodos(data);
 			})
 			.catch(error => console.error(error));
-			toggleUpdating()
+		toggleUpdating()
 	}
-
-
-
 
 	if (init) {
 		fetchTodos();
@@ -134,7 +144,18 @@ function App() {
 			<header className="App-header">
 				<img src={"thy_todo.png"} className="App-logo" alt="logo" />
 				{creating && (
-					<CreateForm handleCreate={handleCreate} toggleCreate={toggleCreating} setNewTodo={setNewTodo}/>
+					<CreateForm 
+						handleCreate={handleCreate} 
+						toggleCreate={toggleCreating} 
+						setNewTodo={setNewTodo}
+					/>
+				)}
+				{updating && (
+					<UpdateForm 
+						handleUpdate={handleUpdate} 
+						toggleUpdating={toggleUpdating} 
+						setNewTodo={setNewTodo}
+					/>
 				)}
 				<div className="Hero">
 					<div className="UpperBar">
@@ -143,7 +164,13 @@ function App() {
 							<AddIcon className="plus" sx={{fontSize: 40}}/>
 						</IconButton>
 					</div>
-					<TodoList todos={searchResults} currentPage={currentPage} setCurrentPage={setCurrentPage} handleDelete={handleDelete}/>
+					<TodoList 
+						todos={searchResults} 
+						currentPage={currentPage} 
+						setCurrentPage={setCurrentPage} 
+						handleDelete={handleDelete} 
+						primeUpdating={primeUpdating}
+					/>
 				</div>
 			</header>
 		</div>
