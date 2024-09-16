@@ -36,6 +36,7 @@ function App() {
 
 	const [creating, setCreating] = useState(false);
 	const [search, setSearch] = useState("");
+	const [currentPage, setCurrentPage] = useState(1);
 
 	const searchResults = todos.filter(todo =>
 		todo.includes(search)
@@ -45,9 +46,9 @@ function App() {
 		setCreating(!creating);
 	}
 
-	function handleSearch() {
-		console.log("Search is ")
-		console.log(search.valueOf())
+	function handleSearch(e) {
+		setCurrentPage(1)
+		setSearch(e)
 	}
 
 	function handleCreate() {
@@ -69,18 +70,18 @@ function App() {
 	return (
 		<div className="App">
 			<header className="App-header">
-				<img src={"t.png"} className="App-logo" alt="logo" />
+				<img src={"thy_todo.png"} className="App-logo" alt="logo" />
 				{creating && (
 					<CreateForm handleCreate={handleCreate} toggleCreate={toggleCreate}/>
 				)}
 				<div className="Hero">
 					<div className="UpperBar">
-						<SearchBar handleSearch={handleSearch} setSearch={setSearch}/>
+						<SearchBar handleSearch={handleSearch} setSearch={handleSearch}/>
 						<IconButton onClick={toggleCreate} className="plus">
 							<AddIcon className="plus" sx={{fontSize: 40}}/>
 						</IconButton>
 					</div>
-					<TodoList todos={searchResults}/>
+					<TodoList todos={searchResults} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
 				</div>
 			</header>
 		</div>

@@ -2,11 +2,10 @@
 import {useEffect, useState} from 'react';
 import Todo from './Todo.js'
 
-function TodoList({todos}) {
+function TodoList({todos, currentPage, setCurrentPage}) {
 
 
 
-	const [currentPage, setCurrentPage] = useState(1);
 	const todosPerPage = 5;
 
 	const lastIndexOfPage = currentPage * todosPerPage;
@@ -50,23 +49,23 @@ function TodoList({todos}) {
 		</div>
 		<div className="LowerBar">
 		<nav>
-				<u1 className="PageSelect">
-					<li className="PageButton">
+				<ul className="PageSelect">
+					<li className="NextPrevButton">
 						<a href='#' className='PageButton'
 							onClick={previousPage}>Prev</a>
 					</li>
 					{
 						numbers.map((n,i) => (
-							<li className={`PageButton ${currentPage === n ? 'current': ''}`} key={i}>
+							<li className={`PageButton ${currentPage === n ? 'active': ''}`} key={i}>
 								<a href='#' className='PageButton' onClick={() => changeCurrentPage(n)} >{n}</a>
 							</li>
 						))
 					}
-					<li className='PageButton'>
+					<li className='NextPrevButton'>
 					<a href='#' className='PageButton'
 					onClick={nextPage}>Next</a>
 					</li>
-				</u1>
+				</ul>
 			</nav>
 			</div>
 </div>

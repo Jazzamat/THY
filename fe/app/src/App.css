@@ -10,8 +10,8 @@
 }
 
 .App-logo {
-	height: 40vmin;
-	pointer-events: none;
+	height: 20vmin;
+	padding: 0px 0px 100px 0px;
 }
 
 .thytodo {
@@ -38,17 +38,33 @@
 
 
 .PageButton {
-	padding: 0px 5px;
+	padding: 0px 10px 0px 0px; 
 	background-color:transparent;
 	color: grey;
 	font-size: 16;
 	border:none;
-	margin: 0px 5px;
-	font-weight: bold;
+	margin: 0px 10px 0px 0px; 
+	text-decoration:none;
 	font-size: calc(5px + 2vmin);
 }
 
-.PageButton:current{
+.NextPrevButton {
+	padding: 0px 10px 0px 0px; 
+	background-color:transparent;
+	color: grey;
+	font-size: 16;
+	border:none;
+	margin: 0px 10px 0px 0px; 
+	list-style-type: none;
+	text-decoration:none;
+	font-size: calc(5px + 2vmin);
+}
+
+.PageButton.active {
+	color: #c70a0c;
+}
+
+ul.PageButton li a {
 	color: #c70a0c;
 }
 
@@ -71,7 +87,7 @@
 
 .TodoButtons {
 	display:flex;
-	flex-direction:column;
+	flex-direction:row;
 	justify-content:center;
 }
 
@@ -96,6 +112,7 @@
 }
 
 .Hero {
+	top: 10%;
 	height: 500px;
 	width: 500px;
 }
@@ -176,12 +193,3 @@
 	color: #c70a0c;
 }
 
-
-@keyframes App-logo-spin {
-from {
-	transform: rotate(0deg);
-}
-to {
-	transform: rotate(360deg);
-}
-}
