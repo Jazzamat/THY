@@ -2,9 +2,8 @@ import {Button, Icon, IconButton} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import {EditIcon} from "@mui/icons-material/Edit";
 import {Edit} from "@mui/icons-material";
-function Todo({content}) {
 
-
+function Todo({content, id, handleDelete}) {
 	return (
 		<div className="Todo">
 			<div className="TodoText">
@@ -14,7 +13,7 @@ function Todo({content}) {
 				<IconButton aria-label="edit" style={{color:"white"}}>
 					<Edit/>
 				</IconButton>
-				<IconButton aria-label="delete" style={{color:"black"}}>
+				<IconButton aria-label="delete" style={{color:"black"}} onClick={e => handleDelete(id)}>
 					<DeleteIcon/>
 				</IconButton>
 			</div>

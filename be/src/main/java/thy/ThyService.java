@@ -40,18 +40,18 @@ public class ThyService {
 		}
 	}
 	
-	public void update(Todo entity) throws Exception {
-		if (repository.existsById(getId(entity))) {
-			getRepository().save(entity);
+	public void update(Long id, String newContent) throws Exception {
+		if (repository.existsById(id)) {
+			Todo todo = getRepository().findById(id).get();
+			todo.setContent(newContent);
+			getRepository().save(todo);
 		}
 		else {
-			throw new Exception("Can't update Rating because it doesn't exist in DB: " + entity);
+			throw new Exception("Can't update Todo because it doesn't exist in DB -> Todo with Id: " + id);
 		}
 	}
 
 	public CrudRepository<Todo, Long> getRepository() {
 		return this.repository;
 	}
-	
-
 } 

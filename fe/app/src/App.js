@@ -13,17 +13,22 @@ function App() {
 
 	const [init, setInit] = useState(true);
 	const [creating, setCreating] = useState(false);
+	const [updating, setUpdating] = useState(false);
 	const [search, setSearch] = useState("");
 	const [currentPage, setCurrentPage] = useState(1);
 	const [newTodo, setNewTodo] = useState(null);
 	const [fethcedResponse, setFetchedResponse] = useState(null);
 
 	const searchResults = todos.filter(todo =>
-		todo.includes(search)
+		todo.content.includes(search)
 	);
 
-	function toggleCreate()  {
+	function toggleCreating()  {
 		setCreating(!creating);
+	}
+
+	function toggleUpdating() {
+		setUpdating(!updating)
 	}
 
 	function handleSearch(e) {
@@ -31,7 +36,7 @@ function App() {
 		setSearch(e)
 	}
 
-	function extractTodos(response) {
+	function extractRawTodos(response) {
 		const array = []
 		for (const element of response) {
 			array.push(element.content)
@@ -40,7 +45,6 @@ function App() {
 		console.log(array)
 		return array
 	}
-
 
 	function fetchTodos() {
 		console.log("Fetching all todos")
@@ -53,8 +57,8 @@ function App() {
 		.then(response => response.json())
 			.then(data => {
 				console.log(data);
-				var todosRaw = extractTodos(data);
-				setTodos(todosRaw);
+				var todosRaw = extractRawTodos(data);
+				setTodos(data);
 				console.log(fethcedResponse)
 			})
 			.catch(error => console.error(error));
@@ -74,14 +78,50 @@ function App() {
 			.then(response => response.json())
 			.then(data => {
 				console.log(data);
-				var todosRaw = extractTodos(data);
-				setTodos(todosRaw);
-				console.log(fethcedResponse)
+				var todosRaw = extractRawTodos(data);
+				setTodos(data);
 			})
 			.catch(error => console.error(error));
-
-		toggleCreate()
+		toggleCreating()
 	};
+
+	function handleDelete(id) {
+		console.log("deleting id: " + id);
+		// Simple POST request with a JSON body using fetch
+		const requestOptions = {
+			method: 'DELETE',
+			headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'},
+		};
+		fetch(`http://127.0.0.1:8080/${id}`, requestOptions)
+			.then(response => response.json())
+			.then(data => {
+				console.log(data);
+				var todosRaw = extractRawTodos(data);
+				setTodos(data);
+			})
+			.catch(error => console.error(error));
+	}
+
+	function handleUpdate(id) {
+		console.log("Editing id: " + id);
+		// Simple POST request with a JSON body using fetch
+		const requestOptions = {
+			method: 'PUT',
+			headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'},
+			body: JSON.stringify({ content:  newTodo})
+		};
+		fetch(`http://127.0.0.1:8080/${id}`, requestOptions)
+			.then(response => response.json())
+			.then(data => {
+				console.log(data);
+				var todosRaw = extractRawTodos(data);
+				setTodos(data);
+			})
+			.catch(error => console.error(error));
+			toggleUpdating()
+	}
+
+
 
 
 	if (init) {
@@ -89,22 +129,21 @@ function App() {
 		setInit(false);
 	}
 
-
 	return (
 		<div className="App">
 			<header className="App-header">
 				<img src={"thy_todo.png"} className="App-logo" alt="logo" />
 				{creating && (
-					<CreateForm handleCreate={handleCreate} toggleCreate={toggleCreate} setNewTodo={setNewTodo}/>
+					<CreateForm handleCreate={handleCreate} toggleCreate={toggleCreating} setNewTodo={setNewTodo}/>
 				)}
 				<div className="Hero">
 					<div className="UpperBar">
 						<SearchBar handleSearch={handleSearch} setSearch={handleSearch}/>
-						<IconButton onClick={toggleCreate} className="plus">
+						<IconButton onClick={toggleCreating} className="plus">
 							<AddIcon className="plus" sx={{fontSize: 40}}/>
 						</IconButton>
 					</div>
-					<TodoList todos={searchResults} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
+					<TodoList todos={searchResults} currentPage={currentPage} setCurrentPage={setCurrentPage} handleDelete={handleDelete}/>
 				</div>
 			</header>
 		</div>
