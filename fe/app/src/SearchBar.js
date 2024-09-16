@@ -6,7 +6,7 @@ function SearchBar({setSearch, handleSearch}) {
 		<div className="SearchBarDiv">
 			<input className="SearchBar" placeholder={"Search"} onChange={e => handleSearch(e.target.value)}>
 			</input>
-			<IconButton onClick={handleSearch} unselectable="true">
+			<IconButton onClick={handleSearch} disabled="true">
 				<SearchIcon/>
 			</IconButton> 
 		</div>

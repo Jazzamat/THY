@@ -7,36 +7,16 @@ import {useEffect, useState} from 'react';
 import CreateForm from './CreateForm';
 
 
-
 function App() {
 
-	const todos = [ // hard coded for now
-		'Make a reservation for dinner at 6',
-		'Feed the cats',
-		'File for a divorce',
-		'I forgot to remind myself that I need to make a reminder',
-		'Subrahmanyan Chandrasekhar: astrophysicist',
-		'Water the plants',
-		'Reply to emails from last week',
-		'Plan the vacation itinerary',
-		'Pick up dry cleaning',
-		'Order groceries online',
-		'Schedule a meeting with the accountant',
-		'Meditate for 10 minutes',
-		'Call mom and check in',
-		'Look into investing in that new startup',
-		'Cancel gym membership (never went anyway)',
-		'Fix the leaky faucet',
-		'Watch that new documentary everyone is talking about',
-		'Buy a birthday gift for Sarah',
-		'Check the weather for the weekend hike',
-		'Start learning Spanish (again)',
-	];
+	const [todos, setTodos] = useState([]);
 
-
+	const [init, setInit] = useState(true);
 	const [creating, setCreating] = useState(false);
 	const [search, setSearch] = useState("");
 	const [currentPage, setCurrentPage] = useState(1);
+	const [newTodo, setNewTodo] = useState(null);
+	const [fethcedResponse, setFetchedResponse] = useState(null);
 
 	const searchResults = todos.filter(todo =>
 		todo.includes(search)
@@ -51,20 +31,62 @@ function App() {
 		setSearch(e)
 	}
 
-	function handleCreate() {
+	function extractTodos(response) {
+		const array = []
+		for (const element of response) {
+			array.push(element.content)
+		}
+		console.log("array:")
+		console.log(array)
+		return array
+	}
 
+
+	function fetchTodos() {
+		console.log("Fetching all todos")
+		// Simple POST request with a JSON body using fetch
+		const requestOptions = {
+			method: 'GET',
+			headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'},
+		};
+		fetch('http://127.0.0.1:8080', requestOptions)
+		.then(response => response.json())
+			.then(data => {
+				console.log(data);
+				var todosRaw = extractTodos(data);
+				setTodos(todosRaw);
+				console.log(fethcedResponse)
+			})
+			.catch(error => console.error(error));
+	}
+
+	function handleCreate(e) {
 		console.log("Handinling Create")
+		console.log("this is the new content:");
+		console.log(newTodo)
 		// Simple POST request with a JSON body using fetch
 		const requestOptions = {
 			method: 'POST',
-			headers: { 'Content-Type': 'application/json'},
-			body: JSON.stringify({ content: 'Remember to submit forms' })
+			headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'},
+			body: JSON.stringify({ content:  newTodo})
 		};
 		fetch('http://127.0.0.1:8080', requestOptions)
 			.then(response => response.json())
-			.then(data => this.setState({ postId: data.id }));
+			.then(data => {
+				console.log(data);
+				var todosRaw = extractTodos(data);
+				setTodos(todosRaw);
+				console.log(fethcedResponse)
+			})
+			.catch(error => console.error(error));
 
 		toggleCreate()
+	};
+
+
+	if (init) {
+		fetchTodos();
+		setInit(false);
 	}
 
 	return (
@@ -72,7 +94,7 @@ function App() {
 			<header className="App-header">
 				<img src={"thy_todo.png"} className="App-logo" alt="logo" />
 				{creating && (
-					<CreateForm handleCreate={handleCreate} toggleCreate={toggleCreate}/>
+					<CreateForm handleCreate={handleCreate} toggleCreate={toggleCreate} setNewTodo={setNewTodo}/>
 				)}
 				<div className="Hero">
 					<div className="UpperBar">

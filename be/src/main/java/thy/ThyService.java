@@ -2,6 +2,7 @@ package thy;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 public class ThyService {
 
 
+	@Autowired
 	private TodoRepository repository;
 
 
