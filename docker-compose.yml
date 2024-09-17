@@ -1,10 +1,12 @@
 
 services:
   fe:
-    container_name: thy-todo-fe
-    build:
-      context: ./fe
-      dockerfile: Dockerfile
+    build: ./fe/app
+    ports:
+      - '3000:3000'
+  be:
+    build: ./be
     ports:
       - '8080:8080'
+
 
