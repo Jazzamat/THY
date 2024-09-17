@@ -45,6 +45,9 @@ public class ThyService {
 			Todo todo = getRepository().findById(id).get();
 			todo.setContent(newContent);
 			getRepository().save(todo);
+
+
+
 		}
 		else {
 			throw new Exception("Can't update Todo because it doesn't exist in DB -> Todo with Id: " + id);

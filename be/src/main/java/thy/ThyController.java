@@ -1,8 +1,8 @@
 package thy;
 
-import java.net.URI;
 import java.util.Optional;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin
@@ -59,12 +58,19 @@ public class ThyController {
 	}
 
 	@PutMapping(value = "/{todo_id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Iterable<Todo>> update(@PathVariable("todo_id") String todo_id, @RequestBody String newContent) {
+	public ResponseEntity<Iterable<Todo>> update(@PathVariable("todo_id") String todo_id, @RequestBody String newContentJson) {
 		System.out.println("Attempting to Edit...");
 		try {
+
+			System.out.println("Here is the json: ");
+			System.out.println(newContentJson);
+			JSONObject obj = new JSONObject(newContentJson);
+			String newContent = obj.getString("newContent");
+
+
 			service.update(Long.valueOf(todo_id), newContent);
 		} catch (Exception e) {
-			System.out.println("What you are trying to delte doesn't exist");
+			System.out.println("What you are trying to update doesn't exist");
 			return ResponseEntity.ok(service.findAll());
 		}
 		System.out.println("Edited Todo");
