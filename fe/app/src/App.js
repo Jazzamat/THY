@@ -121,7 +121,7 @@ function App() {
 		const requestOptions = {
 			method: 'PUT',
 			headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'},
-			body: JSON.stringify({ content:  newTodo})
+			body: JSON.stringify({ newContent:  newTodo})
 		};
 		fetch(`http://127.0.0.1:8080/${todoBeingUpdated}`, requestOptions)
 			.then(response => response.json())
